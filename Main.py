@@ -9,9 +9,9 @@ data_url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.
 r = requests.get(data_url)
 data = r.text
 data_array = [int(feature) for feature in item.split(',')
-             for item in str(r.text[:-1]).splitlines()]
+              for item in str(r.text[:-1]).splitlines()]
 x_data, y_data = np.hsplit(data_array,(4,))
-y_data = np.array(y_data).reshape(150,)
+y_data = np.array(y_data).reshape(150, 1)
 
 for label in y_data:
     label = 1 if label = 'Iris-setosa'
@@ -20,7 +20,7 @@ for label in y_data:
 
 y_data = keras.utils.to_categorical(y_data, )
 
-examples = np.array(data_list).reshape(30, 5)
+examples = np.array(x_data).reshape(30, 4)
 
 input_shape = (1, 4)
 batch_size = 10
@@ -35,6 +35,6 @@ model = Sequential([
 ])
 
 model.compile(optimizer='RMSprop', loss='cross_entropy', metrics='accuracy')
-model.fit(samples_x, samples_y, shuffle=True,
+model.fit(x_data, y_data, shuffle=True,
           batch_size=batch_size, epochs=epoch_num,
-          verbose=3, validation_data=(x_data, y_data))
+          verbose=3, validation_split=0.2)
