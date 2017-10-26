@@ -28,6 +28,7 @@ for i, label in enumerate(y_data):
 x_data = float(x_data)
 y_data = keras.utils.to_categorical(y_data, 3)
 examples = np.array(x_data).reshape(150, 4)
+x_data = x_data.T
 
 input_shape = (1, 4)
 batch_size = 10
