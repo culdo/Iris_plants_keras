@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import numpy as np
 import requests
 import keras
@@ -61,4 +63,7 @@ his = model.fit(x_train, y_train, shuffle=True,
               batch_size=batch_size, epochs=epoch_num,
               verbose=1, validation_data=(x_test, y_test))
 
-model.evaluate(x_test, y_test, verbose=0)
+score = model.evaluate(x_test, y_test, verbose=0)
+print("loss:",score[0])
+print("acc:",score[1])
+
