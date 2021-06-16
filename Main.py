@@ -2,10 +2,10 @@ from __future__ import print_function
 
 import numpy as np
 import requests
-import keras
-from keras.models import Sequential
-from keras.layers import MaxoutDense, Dropout, Dense
-from keras.optimizers import Adam
+import tensorflow.keras as keras
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dropout, Dense
+from tensorflow.keras.optimizers import Adam
 
 data_url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
 r = requests.get(data_url)
@@ -51,9 +51,9 @@ batch_size = 10
 epoch_num = 20
 
 model = Sequential()
-model.add(MaxoutDense(256, input_shape=input_shape))
+model.add(Dense(256, input_shape=input_shape))
 model.add(Dropout(0.8))
-model.add(MaxoutDense(256))
+model.add(Dense(256))
 model.add(Dropout(0.8))
 model.add(Dense(3, activation='softmax'))
 
